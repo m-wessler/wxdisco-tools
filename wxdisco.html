@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .imgbox {
+            display: grid;
+            height: 90%;
+        }
+        .center-fit {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            /* border: 2px black solid; */
+            font: 12px sans-serif;
+            width:90%; 
+            margin-left:5%; 
+            margin-right:5%;
+        }
+
+        td {
+            border: 1px black solid;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+<div class="imgbox">
+    <img class="center-fit" src='current_sref.png'>
+</div>
+
+<div class='table'>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- <script src="d3.min.js?v=3.2.8"></script> -->
+
+    <script type="text/javascript"charset="utf-8">
+        d3.text("./forecast.csv", function(data) {
+            var parsedCSV = d3.csv.parseRows(data);
+
+            var container = d3.select("body")
+                .append("table")
+
+                .selectAll("tr")
+                    .data(parsedCSV).enter()
+                    .append("tr")
+
+                .selectAll("td")
+                    .data(function(d) { return d; }).enter()
+                    .append("td")
+                    .text(function(d) { return d; });
+        });
+    </script>
+</div>
+</body>
+</html>

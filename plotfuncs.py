@@ -101,7 +101,7 @@ def calc_stats(acc_data, init_time):
         
     return dd
 
-def load_plumedata(init_time, site, temp=True):
+def load_plumedata(init_time, site, temp=False):
     from os import path, stat
     from multiprocessing import Pool, cpu_count
 
